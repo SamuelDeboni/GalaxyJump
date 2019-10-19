@@ -1,0 +1,768 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Sprites/Base.png" type="Texture" id=1]
+[ext_resource path="res://ScriptsBase.cs" type="Script" id=2]
+[ext_resource path="res://Flag.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Planet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://BlackHole.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/planet_cracked.png" type="Texture" id=7]
+[ext_resource path="res://Launcher.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Star.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Sprites/Stars1.png" type="Texture" id=10]
+[ext_resource path="res://Music/ObservingTheStar.ogg" type="AudioStream" id=11]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 3.82
+glow_strength = 0.53
+glow_bloom = 1.0
+glow_blend_mode = 1
+glow_bicubic_upscale = true
+
+[sub_resource type="StyleBoxFlat" id=2]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 79.2676
+height = 93.0801
+
+[node name="Main" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Base" type="Sprite" parent="."]
+position = Vector2( 44740.3, -12402.2 )
+rotation = -1.16359
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="Base"]
+margin_left = -43.9121
+margin_top = -135.441
+margin_right = 1.08789
+margin_bottom = -115.441
+rect_rotation = 0.619011
+rect_scale = Vector2( 2.01533, 2.00632 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "Enter"
+
+[node name="Flag3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 6604.14, 804.351 )
+rotation = -2.41826
+
+[node name="Flag4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 13930.7, 2138.87 )
+rotation = -2.41826
+
+[node name="Flag2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -941.991, 4440.13 )
+rotation = 0.430151
+
+[node name="Flag" parent="." instance=ExtResource( 3 )]
+position = Vector2( -282.616, 193.972 )
+rotation = -2.54008
+
+[node name="Player" parent="." groups=[
+"Player",
+] instance=ExtResource( 4 )]
+position = Vector2( -150.383, 252.155 )
+
+[node name="Planets" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="initialPlanet" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( -123.284, -80.1512 )
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 5
+G = 2400.0
+
+[node name="Moon" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( -4407.35, 582.266 )
+rotation = 0.950805
+scale = Vector2( 0.25, 0.25 )
+collision_layer = 5
+G = 3000.0
+
+[node name="Planet2" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( -3600.14, 820.053 )
+rotation = 0.950805
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 5
+G = 2400.0
+
+[node name="BlackHole" parent="Planets" instance=ExtResource( 6 )]
+position = Vector2( -1806.93, 5321.65 )
+rotation = 3.72529e-08
+G = 10000.0
+
+[node name="Planet4" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( -1049.11, 4734.41 )
+rotation = 0.950805
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 5
+G = 2400.0
+
+[node name="Moon2" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 1396.71, 4996.84 )
+rotation = 0.950805
+scale = Vector2( 0.24, 0.24 )
+collision_layer = 5
+G = 3000.0
+
+[node name="BlackHole2" parent="Planets" instance=ExtResource( 6 )]
+editor/display_folded = true
+position = Vector2( 1681.35, 6376.93 )
+rotation = 2.90371
+G = 10000.0
+
+[node name="Sprite2" type="Sprite" parent="Planets/BlackHole2"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Planets/BlackHole2"]
+editor/display_folded = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D"]
+position = Vector2( 1428.9, 981.754 )
+rotation = 0.589543
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D"]
+position = Vector2( 1634.73, 548.043 )
+rotation = 0.290811
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D"]
+position = Vector2( 1105.46, 1334.6 )
+rotation = 0.919046
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D"]
+position = Vector2( 921.691, 1474.25 )
+rotation = 1.01164
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Planets/BlackHole2"]
+editor/display_folded = true
+rotation = 2.78321
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 1630.07, 570.414 )
+rotation = 0.370225
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 1686.63, -375.957 )
+rotation = -0.22645
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 1723.22, 145.738 )
+rotation = 0.0852175
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 1406.75, 996.559 )
+rotation = 0.620753
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 1406.75, 996.559 )
+rotation = 0.620753
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 1065.33, 1363.2 )
+rotation = 0.912559
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Planets/BlackHole2/StaticBody2D2"]
+position = Vector2( 751.379, 1551.74 )
+rotation = 1.11204
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="Planet5" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 2009.9, 4265.55 )
+rotation = 0.950805
+scale = Vector2( 0.8, 0.8 )
+collision_layer = 5
+G = 2000.0
+
+[node name="Planet6" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 6919.28, 454.428 )
+rotation = 0.950805
+scale = Vector2( 0.8, 0.8 )
+collision_layer = 5
+G = 2000.0
+
+[node name="Planet7" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 7895.59, 932.616 )
+rotation = 0.950805
+scale = Vector2( 0.8, 0.8 )
+collision_layer = 5
+G = 2000.0
+
+[node name="Planet8" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 14240.7, 1799.91 )
+rotation = 0.950805
+scale = Vector2( 0.8, 0.8 )
+collision_layer = 5
+
+[node name="Planet9" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 46663.9, -11567.2 )
+rotation = 0.950805
+scale = Vector2( 4, 4 )
+collision_layer = 5
+G = 2000.0
+
+[node name="BlackHole3" parent="Planets" instance=ExtResource( 6 )]
+editor/display_folded = true
+position = Vector2( 8880, 896.008 )
+rotation = -0.436289
+G = 10000.0
+
+[node name="Sprite2" type="Sprite" parent="Planets/BlackHole3"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Planets/BlackHole3"]
+editor/display_folded = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D"]
+position = Vector2( 1428.9, 981.754 )
+rotation = 0.589543
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D"]
+position = Vector2( 1634.73, 548.043 )
+rotation = 0.290811
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D"]
+position = Vector2( 1105.46, 1334.6 )
+rotation = 0.919046
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D"]
+position = Vector2( 921.691, 1474.25 )
+rotation = 1.01164
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Planets/BlackHole3"]
+editor/display_folded = true
+rotation = 2.78321
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 1630.07, 570.414 )
+rotation = 0.370225
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 1686.63, -375.957 )
+rotation = -0.22645
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 1723.22, 145.738 )
+rotation = 0.0852175
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 1406.75, 996.559 )
+rotation = 0.620753
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 1406.75, 996.559 )
+rotation = 0.620753
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 1065.33, 1363.2 )
+rotation = 0.912559
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Planets/BlackHole3/StaticBody2D2"]
+position = Vector2( 751.379, 1551.74 )
+rotation = 1.11204
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="BlackHole4" parent="Planets" instance=ExtResource( 6 )]
+editor/display_folded = true
+position = Vector2( 9385.37, 320 )
+rotation = 1.48081
+G = 10000.0
+
+[node name="Sprite2" type="Sprite" parent="Planets/BlackHole4"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 7 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Planets/BlackHole4"]
+editor/display_folded = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D"]
+position = Vector2( 1428.9, 981.754 )
+rotation = 0.589543
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D"]
+position = Vector2( 1634.73, 548.043 )
+rotation = 0.290811
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D"]
+position = Vector2( 1105.46, 1334.6 )
+rotation = 0.919046
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D"]
+position = Vector2( 921.691, 1474.25 )
+rotation = 1.01164
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Planets/BlackHole4"]
+editor/display_folded = true
+rotation = 2.78321
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 1630.07, 570.414 )
+rotation = 0.370225
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 1686.63, -375.957 )
+rotation = -0.22645
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 1723.22, 145.738 )
+rotation = 0.0852175
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 1406.75, 996.559 )
+rotation = 0.620753
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 1406.75, 996.559 )
+rotation = 0.620753
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 1065.33, 1363.2 )
+rotation = 0.912559
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Planets/BlackHole4/StaticBody2D2"]
+position = Vector2( 751.379, 1551.74 )
+rotation = 1.11204
+scale = Vector2( 4, 4 )
+shape = SubResource( 5 )
+
+[node name="BlackHole5" parent="Planets" instance=ExtResource( 6 )]
+position = Vector2( 15261.7, 1879.07 )
+rotation = 3.72529e-08
+G = 5000.0
+
+[node name="BlackHole6" parent="Planets" instance=ExtResource( 6 )]
+position = Vector2( 15940.5, 1620.9 )
+rotation = 3.72529e-08
+G = 5000.0
+
+[node name="BlackHole7" parent="Planets" instance=ExtResource( 6 )]
+position = Vector2( 16448, 672 )
+rotation = 3.72529e-08
+G = 5000.0
+
+[node name="BlackHole8" parent="Planets" instance=ExtResource( 6 )]
+position = Vector2( 16447, -416 )
+rotation = 3.72529e-08
+G = 5000.0
+
+[node name="Launcher" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+position = Vector2( 76.6133, 344.831 )
+rotation = 2.72273
+quant = 3.0
+
+[node name="Star" parent="Launcher" instance=ExtResource( 9 )]
+position = Vector2( 309.604, 388.769 )
+rotation = -2.72273
+
+[node name="Star2" parent="Launcher" instance=ExtResource( 9 )]
+position = Vector2( -236.613, 281.096 )
+rotation = -2.72273
+
+[node name="Star3" parent="Launcher" instance=ExtResource( 9 )]
+position = Vector2( -25.8793, 784.422 )
+rotation = -2.72273
+
+[node name="Launcher2" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+position = Vector2( -4002.2, 1093.55 )
+rotation = 7.46224
+quant = 5.0
+
+[node name="Star" parent="Launcher2" instance=ExtResource( 9 )]
+position = Vector2( -321.194, -273.14 )
+rotation = -2.72273
+
+[node name="Star5" parent="Launcher2" instance=ExtResource( 9 )]
+position = Vector2( 143.016, -274.784 )
+rotation = -2.72273
+
+[node name="Star4" parent="Launcher2" instance=ExtResource( 9 )]
+position = Vector2( -454.887, 101.673 )
+rotation = -2.72273
+
+[node name="Star2" parent="Launcher2" instance=ExtResource( 9 )]
+position = Vector2( -671.743, 13.7188 )
+rotation = -2.72273
+
+[node name="Star3" parent="Launcher2" instance=ExtResource( 9 )]
+position = Vector2( -688.25, 364.312 )
+rotation = -2.72273
+
+[node name="Launcher3" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+position = Vector2( -793.539, 5124.5 )
+rotation = 5.99683
+quant = 6.0
+
+[node name="Star" parent="Launcher3" instance=ExtResource( 9 )]
+position = Vector2( -325.381, -236.379 )
+rotation = -3.07318
+
+[node name="Star2" parent="Launcher3" instance=ExtResource( 9 )]
+position = Vector2( -409.686, -387.881 )
+rotation = -3.07318
+
+[node name="Star4" parent="Launcher3" instance=ExtResource( 9 )]
+position = Vector2( -306.273, -677.186 )
+rotation = -3.07318
+
+[node name="Star5" parent="Launcher3" instance=ExtResource( 9 )]
+position = Vector2( -175.984, -725.113 )
+rotation = -3.07318
+
+[node name="Star6" parent="Launcher3" instance=ExtResource( 9 )]
+position = Vector2( -18.0322, -704.423 )
+rotation = -3.07318
+
+[node name="Star3" parent="Launcher3" instance=ExtResource( 9 )]
+position = Vector2( -398.491, -547.64 )
+rotation = -2.07857
+
+[node name="Launcher4" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+position = Vector2( 2013.41, 6622.19 )
+rotation = 5.89782
+quant = 9.0
+
+[node name="Star" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( 493.26, -2408.56 )
+rotation = -3.07318
+
+[node name="Star2" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( 210.758, -1792.07 )
+rotation = -3.07318
+
+[node name="Star4" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( -391.92, -1578.4 )
+rotation = -3.07318
+
+[node name="Star5" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( -338.335, -1686.5 )
+rotation = -3.07318
+
+[node name="Star7" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( -315.637, -601.275 )
+rotation = -3.07318
+
+[node name="Star8" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( -454.721, -434.689 )
+rotation = -3.07318
+
+[node name="Star9" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( -570.813, 106.713 )
+rotation = -3.07318
+
+[node name="Star6" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( -258.604, -1758.94 )
+rotation = -3.07318
+
+[node name="Star3" parent="Launcher4" instance=ExtResource( 9 )]
+position = Vector2( 448.179, -2016.19 )
+rotation = -3.07318
+
+[node name="Launcher5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1840.6, 6068.38 )
+rotation = 4.80267
+
+[node name="Launcher6" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+position = Vector2( 6635.09, -151.131 )
+rotation = -0.385365
+quant = 13.0
+
+[node name="Star" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( -272.213, 997.528 )
+rotation = -3.07318
+
+[node name="Star2" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( -343.696, 416.1 )
+rotation = -3.07318
+
+[node name="Star3" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 462.857, 1132.31 )
+rotation = -3.07318
+
+[node name="Star4" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 339.537, 1023.93 )
+rotation = -3.07318
+
+[node name="Star5" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 398.982, 1740.53 )
+rotation = -3.07318
+
+[node name="Star6" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 1143.21, 1229.34 )
+rotation = -3.07318
+
+[node name="Star7" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 1115.11, 1778.15 )
+rotation = -3.07318
+
+[node name="Star8" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 1427.62, 1803.77 )
+rotation = -3.07318
+
+[node name="Star9" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 1921.15, 1910.6 )
+rotation = -3.07318
+
+[node name="Star10" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 2179.64, 1618.64 )
+rotation = -3.07318
+
+[node name="Star11" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 2467.4, 1225.73 )
+rotation = -3.07318
+
+[node name="Star12" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 1857.89, 1289.72 )
+rotation = -3.07318
+
+[node name="Star13" parent="Launcher6" instance=ExtResource( 9 )]
+position = Vector2( 2869.18, 1855.56 )
+rotation = -3.07318
+
+[node name="Launcher7" parent="." instance=ExtResource( 8 )]
+editor/display_folded = true
+position = Vector2( 16314.3, -743.478 )
+rotation = -0.413431
+quant = 14.0
+
+[node name="Star" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -2602.94, 1149.24 )
+rotation = -3.07318
+
+[node name="Star2" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -3170.71, 1095.13 )
+rotation = -3.07318
+
+[node name="Star3" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -3231.08, 1861.33 )
+rotation = -3.07318
+
+[node name="Star4" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -1871.37, 2037.84 )
+rotation = -3.07318
+
+[node name="Star8" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -2084.64, 2136.21 )
+rotation = -3.07318
+
+[node name="Star5" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -1192.12, 2216.46 )
+rotation = -3.07318
+
+[node name="Star9" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -1246.37, 1813.16 )
+rotation = -3.07318
+
+[node name="Star14" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -1508.58, 2115.29 )
+rotation = -3.07318
+
+[node name="Star10" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -471.49, 1180.38 )
+rotation = -3.07318
+
+[node name="Star13" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -654.061, 1365.24 )
+rotation = -3.07318
+
+[node name="Star11" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -163.24, 343.624 )
+rotation = -3.07318
+
+[node name="Star12" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( 138.338, 272.99 )
+rotation = -3.07318
+
+[node name="Star6" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( -316.764, 1527.69 )
+rotation = -3.07318
+
+[node name="Star7" parent="Launcher7" instance=ExtResource( 9 )]
+position = Vector2( 171.445, 539.955 )
+rotation = -3.07318
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+layer = -4
+
+[node name="Stars" type="TextureRect" parent="CanvasLayer"]
+editor/display_folded = true
+margin_left = -137.087
+margin_top = -61.4875
+margin_right = 1142.91
+margin_bottom = 658.513
+texture = ExtResource( 10 )
+
+[node name="Stars2" type="TextureRect" parent="CanvasLayer/Stars"]
+margin_left = 1149.87
+margin_top = 4.20474
+margin_right = 2429.87
+margin_bottom = 724.205
+texture = ExtResource( 10 )
+
+[node name="Stars3" type="TextureRect" parent="CanvasLayer/Stars"]
+margin_left = 1140.13
+margin_top = 605.534
+margin_right = 2420.13
+margin_bottom = 1325.53
+texture = ExtResource( 10 )
+
+[node name="Stars4" type="TextureRect" parent="CanvasLayer/Stars"]
+margin_left = 57.662
+margin_top = 599.318
+margin_right = 1337.66
+margin_bottom = 1319.32
+texture = ExtResource( 10 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
+[connection signal="button_up" from="Base/Button" to="Base" method="_on_Button_button_up"]
+[connection signal="body_entered" from="Launcher/Star" to="Launcher" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher/Star2" to="Launcher" method="_OnColectables"]
+[connection signal="body_exited" from="Launcher/Star3" to="Launcher" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher2/Star" to="Launcher2" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher2/Star5" to="Launcher2" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher2/Star4" to="Launcher2" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher2/Star2" to="Launcher2" method="_OnColectables"]
+[connection signal="body_exited" from="Launcher2/Star3" to="Launcher2" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher3/Star" to="Launcher3" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher3/Star2" to="Launcher3" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher3/Star4" to="Launcher3" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher3/Star5" to="Launcher3" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher3/Star6" to="Launcher3" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher3/Star3" to="Launcher3" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star2" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star4" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star5" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star7" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star8" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star9" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star6" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher4/Star3" to="Launcher4" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star2" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star3" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star4" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star5" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star6" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star7" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star8" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star9" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star10" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star11" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star12" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher6/Star13" to="Launcher6" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star2" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star3" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star4" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star8" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star5" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star9" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star14" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star10" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star13" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star11" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star12" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star6" to="Launcher7" method="_OnColectables"]
+[connection signal="body_entered" from="Launcher7/Star7" to="Launcher7" method="_OnColectables"]

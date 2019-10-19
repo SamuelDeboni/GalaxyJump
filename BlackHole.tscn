@@ -1,0 +1,88 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Scripts/Planet.cs" type="Script" id=1]
+[ext_resource path="res://Sprites/BlackHole.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Particle.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 171.197
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 50, 50, 50, 1, 100, 100, 100, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.00578703, 0.104 ), 0.0, 0.047225, 0, 0, Vector2( 0.994213, 0.3768 ), 0.724114, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.24864, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 1, 0.0820312, 0.0820312, 0.0820312, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.2932 ), -1.62462, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+trail_size_modifier = SubResource( 5 )
+trail_color_modifier = SubResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 700.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+orbit_velocity_curve = SubResource( 8 )
+tangential_accel = 100.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 12 )
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 519.887
+
+[node name="BlackHole" type="StaticBody2D" groups=[
+"Planet",
+]]
+scale = Vector2( 0.1, 0.1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 50.7472, -50.4822 ]
+}
+G = 50000.0
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 2, 2, 2, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 50
+lifetime = 2.0
+preprocess = 65.21
+process_material = SubResource( 6 )
+texture = ExtResource( 3 )
+
+[node name="EventHotizon" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventHotizon"]
+shape = SubResource( 13 )
+[connection signal="body_entered" from="EventHotizon" to="." method="_on_EventHotizon_body_entered"]
